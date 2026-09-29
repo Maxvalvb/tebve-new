@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { FebbyLogo } from './FebbyLogo';
 
 interface FooterProps {
   onOpenLeadModal: (source?: string) => void;
@@ -45,30 +46,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLeadModal, onOpenPolicy })
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Grid: Enlarged Brand on the left + 3 organized link groups */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12">
-          {/* Brand Info (Enlarged logo and typography) */}
+          {/* Brand Info (Pure toy text "febby") */}
           <div className="lg:col-span-4 flex flex-col items-start">
-            <a href="#" className="flex items-center gap-3 group cursor-pointer mb-4">
-              <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
-                <svg
-                  viewBox="0 0 24 24"
-                  className="w-full h-full fill-[#d2f835] group-hover:scale-105 transition-transform duration-200"
-                  style={{ filter: 'drop-shadow(0 2px 4px rgba(210,248,53,0.3))' }}
-                >
-                  <path
-                    d="M12 2C7 2 3 7 3 13C3 17.5 6.5 21 11 21C16.5 21 21 16.5 21 11C21 6 16.5 2 12 2Z"
-                    fill="#d2f835"
-                  />
-                  <path
-                    d="M12 5C11 8 10 12 7 15"
-                    stroke="#11161a"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </div>
-              <span className="font-extrabold text-2xl sm:text-3xl tracking-tight text-[#11161a]">
-                tebve
-              </span>
+            <a href="#" className="group cursor-pointer mb-4 flex items-center">
+              <FebbyLogo size="lg" />
             </a>
 
             <p className="text-sm text-neutral-500 max-w-sm leading-relaxed mb-6">
@@ -111,7 +92,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLeadModal, onOpenPolicy })
         {/* Bottom Bar */}
         <div className="border-t border-neutral-100 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
           <div>
-            © 2025 tebve. Все права защищены.
+            © 2025 febby.ru. Все права защищены.
           </div>
 
           <div className="flex items-center gap-6">

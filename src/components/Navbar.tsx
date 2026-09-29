@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Menu, X } from 'lucide-react';
+import { FebbyLogo } from './FebbyLogo';
 
 interface NavbarProps {
   onOpenLeadModal: (source?: string) => void;
@@ -19,22 +20,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLeadModal }) => {
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Brand Logo */}
-        <a href="#" className="flex items-center gap-2 group cursor-pointer">
-          <div className="relative w-6 h-6 flex items-center justify-center">
-            {/* Organic lime seed / leaf emblem matching the mockup */}
-            <svg
-              viewBox="0 0 24 24"
-              className="w-6 h-6 fill-[#d2f835] group-hover:scale-110 transition-transform duration-200"
-              style={{ filter: 'drop-shadow(0 2px 4px rgba(210,248,53,0.3))' }}
-            >
-              <path d="M12 2C7 2 3 7 3 13C3 17.5 6.5 21 11 21C16.5 21 21 16.5 21 11C21 6 16.5 2 12 2Z" fill="#d2f835" />
-              <path d="M12 5C11 8 10 12 7 15" stroke="#11161a" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </div>
-          <span className="font-bold text-xl sm:text-2xl tracking-tight text-[#11161a]">
-            tebve
-          </span>
+        {/* Brand: playful pure text "febby" */}
+        <a href="#" className="group cursor-pointer flex items-center">
+          <FebbyLogo size="md" />
         </a>
 
         {/* Center Nav Links */}
