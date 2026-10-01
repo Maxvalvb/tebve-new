@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Directives for Yandex and Google bots
+User-agent: Yandex
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+# Host & Sitemap specification
+Host: https://febby.ru
+Sitemap: https://febby.ru/sitemap.xml
