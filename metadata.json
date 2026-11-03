@@ -1,6 +1,5 @@
 {
-  "name": "tebve — Ремонт квартир под ваш бюджет",
-  "description": "tebve — сервис подбора проверенных подрядчиков и вариантов ремонта квартир под любой бюджет. Прозрачные сметы, реальные сроки и авторский надзор.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "name": "Tebve разработка сайтов ",
+  "description": "Современная студия разработки сайтов под ключ",
+  "requestFramePermissions": []
 }
