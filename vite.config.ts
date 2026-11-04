@@ -11,6 +11,11 @@ export default defineConfig(() => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+    build: {
+      // Targets older Chrome (60+), iOS Safari (12+), Firefox, and older Android WebViews
+      target: ['es2015', 'chrome64', 'edge79', 'firefox67', 'safari12'],
+      cssTarget: ['chrome61', 'firefox60', 'safari11', 'edge79'],
+    },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
@@ -20,3 +25,4 @@ export default defineConfig(() => {
     },
   };
 });
+

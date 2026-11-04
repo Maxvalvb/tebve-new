@@ -7,6 +7,30 @@
   }
 }
 
+/* Fallback for older Safari & Android browsers that require -webkit- prefixes */
+.backdrop-blur-md,
+.backdrop-blur-sm,
+.backdrop-blur-lg {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+/* Safe viewport height fallback for older mobile browsers not supporting svh/dvh */
+@supports not (height: 100dvh) {
+  .min-h-\[100svh\] {
+    min-height: 100vh !important;
+  }
+  .min-h-\[calc\(100svh-4rem\)\] {
+    min-height: calc(100vh - 4rem) !important;
+  }
+  .min-h-\[calc\(100svh-5rem\)\] {
+    min-height: calc(100vh - 5rem) !important;
+  }
+  .max-h-\[100dvh\] {
+    max-height: 100vh !important;
+  }
+}
+
 .font-handwriting {
   font-family: 'Caveat', cursive;
 }
