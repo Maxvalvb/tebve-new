@@ -1,0 +1,41 @@
+name: Send Telegram Lead Notification
+
+on:
+  repository_dispatch:
+    types: [new_lead]
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Customer Name'
+        required: false
+        default: 'Не указано'
+      phone:
+        description: 'Customer Phone / Contact'
+        required: false
+        default: 'Не указано'
+      service:
+        description: 'Service Name'
+        required: false
+        default: 'Разработка сайта'
+      message:
+        description: 'Message Text'
+        required: false
+        default: ''
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram Message
+        run: |
+          NAME="${{ github.event.client_payload.name || github.event.inputs.name }}"
+          PHONE="${{ github.event.client_payload.phone || github.event.inputs.phone }}"
+          SERVICE="${{ github.event.client_payload.service || github.event.inputs.service }}"
+          MESSAGE="${{ github.event.client_payload.message || github.event.inputs.message }}"
+          
+          TEXT="🔥 *Новая заявка с сайта febby.ru/website!*%0A%0A👤 *Имя:* $NAME%0A📞 *Контакты:* $PHONE%0A🛠 *Услуга:* $SERVICE%0A💬 *Сообщение:* $MESSAGE"
+          
+          curl -s -X POST "https://api.telegram.org/bot9282002540:AAHtKUAyqkqXyzmFOjTZEQlVpPG8vC-U_Mo/sendMessage" \
+            -d "chat_id=324919537" \
+            -d "text=$TEXT" \
+            -d "parse_mode=Markdown"
