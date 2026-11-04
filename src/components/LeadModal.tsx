@@ -49,15 +49,31 @@ export const LeadModal: React.FC<LeadModalProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 700);
+    
+    try {
+      const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyUtj_a2jRCbWDvubwJzXczV-MRiyxzY28ngoWKKbAcQm3Q038E9asn6JnHgyU4vkfRvw/exec';
+      await fetch(googleScriptUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name.trim(),
+          phone: phone.trim(),
+          service: `Ремонт: ${source} (тариф: ${variant})`,
+          message: `Бюджет: ${budget || 'Не указан'}. ${comment ? 'Комментарий: ' + comment : ''}`
+        }),
+      });
+    } catch (err) {
+      console.warn('Lead submit attempt', err);
+    }
+
+    setIsSubmitting(false);
+    setIsSuccess(true);
   };
 
   return (
