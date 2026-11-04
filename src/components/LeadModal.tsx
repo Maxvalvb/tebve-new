@@ -53,27 +53,27 @@ export const LeadModal: React.FC<LeadModalProps> = ({
     e.preventDefault();
     if (!validate()) return;
 
-    setIsSubmitting(true);
-    
-    try {
-      const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyUtj_a2jRCbWDvubwJzXczV-MRiyxzY28ngoWKKbAcQm3Q038E9asn6JnHgyU4vkfRvw/exec';
-      await fetch(googleScriptUrl, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: name.trim(),
-          phone: phone.trim(),
-          service: `Ремонт: ${source} (тариф: ${variant})`,
-          message: `Бюджет: ${budget || 'Не указан'}. ${comment ? 'Комментарий: ' + comment : ''}`
-        }),
-      });
-    } catch (err) {
+    // Fire-and-forget background send to Google Apps Script
+    const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyUtj_a2jRCbWDvubwJzXczV-MRiyxzY28ngoWKKbAcQm3Q038E9asn6JnHgyU4vkfRvw/exec';
+    fetch(googleScriptUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name.trim(),
+        phone: phone.trim(),
+        service: `Ремонт: ${source} (тариф: ${variant})`,
+        message: `Бюджет: ${budget || 'Не указан'}. ${comment ? 'Комментарий: ' + comment : ''}`
+      }),
+    }).catch((err) => {
       console.warn('Lead submit attempt', err);
-    }
+    });
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+    // Instant smooth feedback to client
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSuccess(true);
+    }, 450);
   };
 
   return (

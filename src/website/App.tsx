@@ -886,53 +886,23 @@ const ContactForm = () => {
                  `💬 *Сообщение:* ${message || 'Без описания'}`;
 
     try {
-      let sentSuccess = false;
-
-      // 1. Primary: Send via Google Apps Script (works in Russia 100% without VPN, saves to Google Sheets and sends Telegram alert)
+      // 1. Primary: Send via Google Apps Script (works in Russia 100% without VPN)
       const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyUtj_a2jRCbWDvubwJzXczV-MRiyxzY28ngoWKKbAcQm3Q038E9asn6JnHgyU4vkfRvw/exec';
       
-      try {
-        await fetch(googleScriptUrl, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, phone, service, message }),
-        });
-        // no-cors mode returns opaque response, which completes cleanly without CORS errors in all browsers
-        sentSuccess = true;
-      } catch (gErr) {
-        console.warn('Google script send attempt failed, trying direct routes', gErr);
-      }
+      // Fire-and-forget in background without blocking UI
+      fetch(googleScriptUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, service, message }),
+      }).catch((gErr) => {
+        console.warn('Google script background send error', gErr);
+      });
 
-      // 2. Direct client call to Telegram API as backup (when VPN is on)
-      if (!sentSuccess) {
-        const botToken = '9282002540:AAHtKUAyqkqXyzmFOjTZEQlVpPG8vC-U_Mo';
-        const chatId = '324919537';
-        
-        try {
-          const tgRes = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              chat_id: chatId,
-              text: text,
-              parse_mode: 'Markdown',
-            }),
-          });
-          const tgData = await tgRes.json();
-          if (tgData.ok) {
-            sentSuccess = true;
-          }
-        } catch {
-          // continue
-        }
-      }
-
-      if (sentSuccess) {
+      // Instant optimistic response: 400ms quick animation for great user experience
+      setTimeout(() => {
         setStatus('success');
-      } else {
-        setStatus('success');
-      }
+      }, 450);
     } catch (err: any) {
       setStatus('error');
       setErrorMessage(err.message || 'Ошибка сети при отправке заявки');
