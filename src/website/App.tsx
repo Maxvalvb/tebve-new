@@ -218,7 +218,36 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
 
   useEffect(() => {
-    // Dynamically load Yandex Forms embed script for automatic iframe height & responsive adaptation
+    // 1. Initialize Yandex Metrika counter 114060460 exclusively for website section
+    const metrikaId = 114060460;
+    if (!(window as any).ym) {
+      (function(m: any, e: any, t: any, r: any, i: any, k?: any, a?: any) {
+        m[i] = m[i] || function() { (m[i].a = m[i].a || []).push(arguments); };
+        m[i].l = 1 * (new Date() as any);
+        for (let j = 0; j < document.scripts.length; j++) {
+          if (document.scripts[j].src === r) { return; }
+        }
+        k = e.createElement(t);
+        a = e.getElementsByTagName(t)[0];
+        k.async = 1;
+        k.src = r;
+        a.parentNode.insertBefore(k, a);
+      })(window, document, 'script', `https://mc.yandex.ru/metrika/tag.js?id=${metrikaId}`, 'ym');
+    }
+
+    if ((window as any).ym) {
+      (window as any).ym(metrikaId, 'init', {
+        ssr: true,
+        webvisor: true,
+        clickmap: true,
+        referrer: document.referrer,
+        url: location.href,
+        accurateTrackBounce: true,
+        trackLinks: true
+      });
+    }
+
+    // 2. Dynamically load Yandex Forms embed script for automatic iframe height & responsive adaptation
     const script = document.createElement("script");
     script.src = "https://forms.yandex.ru/_static/embed.js";
     script.async = true;
