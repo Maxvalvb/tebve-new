@@ -69,7 +69,7 @@ const portfolio = [
 const pricing = [
   {
     title: "Сайт под ключ",
-    price: "25 000 ₽",
+    price: "30 000 ₽",
     time: "от 2 дней",
     features: [
       "Уникальный дизайн под ваш бренд",
@@ -83,7 +83,7 @@ const pricing = [
   },
   {
     title: "Сайт + Поддержка",
-    price: "25 000 ₽",
+    price: "30 000 ₽",
     subPrice: "+ 5 500 ₽ / мес",
     time: "от 2 дней",
     features: [
@@ -113,7 +113,7 @@ const pricing = [
 ];
 const faqs = [
   {
-    q: "Что входит в стоимость сайта за 25 000 руб?",
+    q: "Что входит в стоимость сайта за 30 000 руб?",
     a: "В эту стоимость входит полноценный сайт под ключ: разработка уникального дизайна, адаптивная верстка под все устройства, настройка форм обратной связи, базовая SEO-оптимизация, а также домен в подарок на 1 год и надежный бесплатный хостинг.",
   },
   {
@@ -869,7 +869,7 @@ const FAQItem: React.FC<{ question: string; answer: string }> = ({
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [service, setService] = useState('Сайт под ключ (25 000 ₽)');
+  const [service, setService] = useState('Сайт под ключ (30 000 ₽)');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -975,8 +975,8 @@ const ContactForm = () => {
           onChange={(e) => setService(e.target.value)}
           className="w-full bg-[#1a2332] border border-white/10 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-[#bcf824] transition-colors"
         >
-          <option value="Сайт под ключ (25 000 ₽)">Сайт под ключ (25 000 ₽)</option>
-          <option value="Сайт + Поддержка (25 000 ₽ + 5 500 ₽/мес)">Сайт + Поддержка (25 000 ₽ + 5 500 ₽/мес)</option>
+          <option value="Сайт под ключ (30 000 ₽)">Сайт под ключ (30 000 ₽)</option>
+          <option value="Сайт + Поддержка (30 000 ₽ + 5 500 ₽/мес)">Сайт + Поддержка (30 000 ₽ + 5 500 ₽/мес)</option>
           <option value="Индивидуальная разработка">Индивидуальная разработка</option>
           <option value="Другая задача">Другая задача</option>
         </select>

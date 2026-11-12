@@ -21,12 +21,12 @@ export function generateSeoPages() {
   // Title & description for Yandex Direct / Search
   websiteHtml = websiteHtml.replace(
     '<title>febby.ru — Ремонт квартир под ваш бюджет</title>',
-    '<title>Создание и разработка сайтов под ключ от 25 000 ₽ — febby.ru</title>'
+    '<title>Создание и разработка сайтов под ключ от 30 000 ₽ — febby.ru</title>'
   );
 
   websiteHtml = websiteHtml.replace(
     '<meta name="description" content="febby.ru — сервис подбора проверенных подрядчиков и вариантов ремонта квартир под любой бюджет. Прозрачные сметы, реальные сроки и авторский надзор." />',
-    '<meta name="description" content="Разработка продающих сайтов под ключ от 25 000 ₽. Создание лендингов, корпоративных сайтов и интернет-магазинов. Срок от 2 дней. Домен и хостинг в подарок!" />\n    <meta name="keywords" content="создание сайтов, разработка сайтов под ключ, заказать лендинг, создание интернет-магазина, сайт для бизнеса, веб студия, купить сайт, веб разработка, разработка лендинга" />'
+    '<meta name="description" content="Разработка продающих сайтов под ключ от 30 000 ₽. Создание лендингов, корпоративных сайтов и интернет-магазинов. Срок от 2 дней. Домен и хостинг в подарок!" />\n    <meta name="keywords" content="создание сайтов, разработка сайтов под ключ, заказать лендинг, создание интернет-магазина, сайт для бизнеса, веб студия, купить сайт, веб разработка, разработка лендинга" />'
   );
 
   // Canonical URL
@@ -38,12 +38,12 @@ export function generateSeoPages() {
   // OpenGraph metadata
   websiteHtml = websiteHtml.replace(
     '<meta property="og:title" content="febby.ru — Ремонт квартир под ваш бюджет" />',
-    '<meta property="og:title" content="Создание и разработка сайтов под ключ от 25 000 ₽ — febby.ru" />'
+    '<meta property="og:title" content="Создание и разработка сайтов под ключ от 30 000 ₽ — febby.ru" />'
   );
 
   websiteHtml = websiteHtml.replace(
     '<meta property="og:description" content="febby.ru — сервис подбора проверенных подрядчиков и вариантов ремонта квартир под любой бюджет. Прозрачные сметы, реальные сроки и авторский надзор." />',
-    '<meta property="og:description" content="Разработка продающих сайтов под ключ от 25 000 ₽. Создание лендингов, корпоративных сайтов и интернет-магазинов. Срок от 2 дней. Домен и хостинг в подарок!" />'
+    '<meta property="og:description" content="Разработка продающих сайтов под ключ от 30 000 ₽. Создание лендингов, корпоративных сайтов и интернет-магазинов. Срок от 2 дней. Домен и хостинг в подарок!" />'
   );
 
   websiteHtml = websiteHtml.replace(
@@ -54,7 +54,7 @@ export function generateSeoPages() {
   // Schema.org metadata
   websiteHtml = websiteHtml.replace(
     '"@type": "HomeAndConstructionBusiness"',
-    '"@type": "ProfessionalService",\n      "serviceType": "Web Development",\n      "priceRange": "от 25 000 ₽"'
+    '"@type": "ProfessionalService",\n      "serviceType": "Web Development",\n      "priceRange": "от 30 000 ₽"'
   );
 
   websiteHtml = websiteHtml.replace(
@@ -64,7 +64,7 @@ export function generateSeoPages() {
 
   websiteHtml = websiteHtml.replace(
     '"description": "Сервис подбора проверенных подрядчиков и вариантов ремонта квартир под любой бюджет. Прозрачные сметы, реальные сроки и авторский надзор."',
-    '"description": "Разработка продающих сайтов под ключ от 25 000 ₽. Создание лендингов, корпоративных сайтов и интернет-магазинов. Срок от 2 дней. Домен и хостинг в подарок!"'
+    '"description": "Разработка продающих сайтов под ключ от 30 000 ₽. Создание лендингов, корпоративных сайтов и интернет-магазинов. Срок от 2 дней. Домен и хостинг в подарок!"'
   );
 
   // Rich Static Content inside <div id="root"> specifically for Yandex Search & Direct Bot
@@ -72,7 +72,7 @@ export function generateSeoPages() {
   const staticContent = `
     <header style="padding:20px;text-align:center;">
       <h1>Разработка и создание сайтов под ключ — febby.ru</h1>
-      <p>Создаем современные продающие сайты для бизнеса от 25 000 ₽. Срок от 2 дней. Домен и надежный хостинг в подарок на 1 год.</p>
+      <p>Создаем современные продающие сайты для бизнеса от 30 000 ₽. Срок от 2 дней. Домен и надежный хостинг в подарок на 1 год.</p>
     </header>
     <main style="padding:20px;max-width:1200px;margin:0 auto;">
       <section>
@@ -87,7 +87,7 @@ export function generateSeoPages() {
       </section>
       <section>
         <h2>Тарифы и стоимость разработки</h2>
-        <p><strong>Тариф «Сайт под ключ»:</strong> 25 000 ₽. Срок от 2 дней. Включает адаптивный дизайн для ПК и смартфонов, базовое SEO, домен и хостинг на 1 год.</p>
+        <p><strong>Тариф «Сайт под ключ»:</strong> 30 000 ₽. Срок от 2 дней. Включает адаптивный дизайн для ПК и смартфонов, базовое SEO, домен и хостинг на 1 год.</p>
       </section>
       <section>
         <h2>Наше портфолио проектов</h2>
