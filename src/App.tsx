@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { HowItWorks } from './components/HowItWorks';
@@ -19,6 +19,38 @@ import { LeadModal } from './components/LeadModal';
 import { PolicyModal } from './components/PolicyModal';
 
 export default function App() {
+  useEffect(() => {
+    const metrikaId = 114230014;
+    const scriptUrl = `https://mc.yandex.ru/metrika/tag.js?id=${metrikaId}`;
+    const alreadyLoaded = Array.from(document.scripts).some((s) => s.src === scriptUrl);
+    if (alreadyLoaded) return;
+
+    (function (m: any, e: any, t: any, r: any, i: any, k?: any, a?: any) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+      m[i].l = 1 * (new Date() as any);
+      for (let j = 0; j < document.scripts.length; j++) {
+        if (document.scripts[j].src === r) { return; }
+      }
+      k = e.createElement(t);
+      a = e.getElementsByTagName(t)[0];
+      k.async = 1;
+      k.src = r;
+      a.parentNode.insertBefore(k, a);
+    })(window, document, 'script', scriptUrl, 'ym');
+
+    if ((window as any).ym) {
+      (window as any).ym(metrikaId, 'init', {
+        ssr: true,
+        webvisor: true,
+        clickmap: true,
+        referrer: document.referrer,
+        url: location.href,
+        accurateTrackBounce: true,
+        trackLinks: true,
+      });
+    }
+  }, []);
+
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadSource, setLeadSource] = useState('Оставить заявку');
   const [leadService, setLeadService] = useState('Ремонт квартир и домов');

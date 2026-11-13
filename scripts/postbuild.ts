@@ -200,16 +200,34 @@ export function generateSeoPages() {
     </main>
   `;
 
-  const mainHtml = baseHtml.replace(
+  // Insert Yandex.Metrika counter 114230014 exclusively for febby.ru/ (repair site)
+  const mainMetrikaScript = `
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=114230014', 'ym');
+
+        ym(114230014, 'init', {ssr:true, webvisor:true, clickmap:true, referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/114230014" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+  `;
+
+  let mainHtml = baseHtml.replace('</head>', `${mainMetrikaScript}\n  </head>`);
+  mainHtml = mainHtml.replace(
     '<div id="root"></div>',
     `<div id="root">${repairStaticContent}</div>`
   );
   fs.writeFileSync(indexPath, mainHtml, 'utf-8');
 
-  // 3. Copy clean SPA fallback 404.html
-  fs.copyFileSync(indexPath, path.join(distDir, '404.html'));
+  // 3. Copy clean neutral SPA fallback 404.html (counter initializes per route in React)
+  fs.writeFileSync(path.join(distDir, '404.html'), baseHtml, 'utf-8');
 
-  console.log('Successfully generated Kaliningrad SEO HTML for both febby.ru/ and febby.ru/website!');
+  console.log('Successfully generated SEO HTML & isolated Metrika counters (114230014 on /, 114060460 on /website)!');
 }
 
 generateSeoPages();
