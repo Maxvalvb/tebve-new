@@ -29,6 +29,9 @@
   .max-h-\[100dvh\] {
     max-height: 100vh !important;
   }
+  .max-h-\[92dvh\] {
+    max-height: 92vh !important;
+  }
 }
 
 .font-handwriting {

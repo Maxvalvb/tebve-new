@@ -1,90 +1,74 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { FileText, MessageSquareText, CheckCircle2 } from 'lucide-react';
 
 export const HowItWorks: React.FC = () => {
-  const steps = [
-    {
-      number: '01',
-      title: 'Вы указываете бюджет',
-      desc: 'Сообщаете комфортную для вас сумму и ключевые пожелания к ремонту',
-    },
-    {
-      number: '02',
-      title: 'Мы подбираем варианты',
-      desc: 'Формируем точные прозрачные сметы и планировочные концепции под ключ',
-    },
-    {
-      number: '03',
-      title: 'Вы выбираете подходящий',
-      desc: 'Сравниваете тарифы, материалы и утверждаете итоговый план работ',
-    },
-    {
-      number: '04',
-      title: 'Назначаем ремонт',
-      desc: 'Заключаем официальный договор и выводим проверенную бригаду на объект',
-    },
-    {
-      number: '05',
-      title: 'Контролируем все этапы',
-      desc: 'Ведем авторский и технический надзор вплоть до финальной сдачи квартиры',
-    },
-  ];
-
   return (
-    <section id="how-it-works" className="py-14 sm:py-20 bg-[#fafbfc] border-y border-neutral-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="max-w-2xl mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#11161a]">
-            Как это работает?
-          </h2>
-          <p className="mt-3 text-sm sm:text-base text-neutral-500 leading-relaxed">
-            Пять простых и понятных шагов к идеальной квартире без стресса, задержек и переплат.
-          </p>
-        </div>
+    <section id="how-it-works" className="bg-white py-12 md:py-16">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#11161A] tracking-tight mb-9">
+          Как это работает?
+        </h2>
 
-        {/* Cohesive Stepper Container with unified progress track */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 lg:gap-5 relative">
-          {steps.map((step, idx) => (
-            <div
-              key={step.number}
-              className="bg-white border border-neutral-200/90 hover:border-neutral-900/30 rounded-2xl p-6 sm:p-5 lg:p-6 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group relative"
-            >
-              <div>
-                {/* Header row with Step number and status indicator */}
-                <div className="flex items-center justify-between mb-5">
-                  <div className="w-10 h-10 rounded-full bg-[#d3f938] text-neutral-900 font-bold text-sm flex items-center justify-center shrink-0 shadow-xs group-hover:scale-110 transition-transform">
-                    {step.number}
-                  </div>
-
-                  {idx < steps.length - 1 ? (
-                    <div className="hidden md:flex text-neutral-300 group-hover:text-neutral-500 transition-colors">
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
-                  ) : (
-                    <div className="text-[#85b507]">
-                      <CheckCircle2 className="w-4 h-4" />
-                    </div>
-                  )}
-                </div>
-
-                {/* Step title */}
-                <h3 className="text-base font-bold text-neutral-900 leading-snug group-hover:text-black transition-colors mb-2">
-                  {step.title}
-                </h3>
-
-                {/* Step details */}
-                <p className="text-xs text-neutral-500 leading-relaxed">
-                  {step.desc}
-                </p>
-              </div>
-
-              {/* Step indicator progress dash */}
-              <div className="mt-6 pt-3 border-t border-neutral-100 flex items-center justify-between text-[11px] font-medium text-neutral-400">
-                <span>Шаг {idx + 1} из 5</span>
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+          {/* Step 1 */}
+          <div className="flex flex-col items-start">
+            <div className="flex items-center gap-4 mb-4">
+              <span className="w-9 h-9 rounded-full bg-[#C4FB18] text-[#11161A] font-extrabold text-base flex items-center justify-center tabular-nums shrink-0">
+                1
+              </span>
+              <FileText className="w-7 h-7 text-[#11161A] stroke-[1.6]" />
             </div>
-          ))}
+
+            <h3 className="text-[18px] font-bold text-[#11161A] leading-snug">
+              Вы оставляете заявку
+            </h3>
+            <p className="mt-1 text-[14px] text-neutral-600 leading-relaxed">
+              и получаете расчёты
+            </p>
+
+            {/* Lime highlight box with client budget example */}
+            <div className="mt-4 w-full max-w-[320px] px-4 py-3.5 rounded-xl bg-[#EEFDAC] border border-[#C4FB18] text-[13px] text-[#11161A] leading-snug font-medium">
+              Например: «У нас есть бюджет <span className="font-bold tabular-nums">780 000 ₽</span> — какие варианты можете предложить?»
+            </div>
+          </div>
+
+          {/* Step 2 */}
+          <div className="flex flex-col items-start">
+            <div className="flex items-center gap-4 mb-4">
+              <span className="w-9 h-9 rounded-full bg-[#C4FB18] text-[#11161A] font-extrabold text-base flex items-center justify-center tabular-nums shrink-0">
+                2
+              </span>
+              <MessageSquareText className="w-7 h-7 text-[#11161A] stroke-[1.6]" />
+            </div>
+
+            <h3 className="text-[18px] font-bold text-[#11161A] leading-snug">
+              Бригады и компании
+              <br />
+              предлагают цены
+            </h3>
+            <p className="mt-2.5 text-[14px] text-neutral-600 leading-relaxed max-w-[270px]">
+              Вы получаете предложения от проверенных исполнителей в Калининграде
+            </p>
+          </div>
+
+          {/* Step 3 */}
+          <div className="flex flex-col items-start">
+            <div className="flex items-center gap-4 mb-4">
+              <span className="w-9 h-9 rounded-full bg-[#C4FB18] text-[#11161A] font-extrabold text-base flex items-center justify-center tabular-nums shrink-0">
+                3
+              </span>
+              <CheckCircle2 className="w-7 h-7 text-[#11161A] stroke-[1.6]" />
+            </div>
+
+            <h3 className="text-[18px] font-bold text-[#11161A] leading-snug">
+              Вы выбираете
+              <br />
+              лучшее предложение
+            </h3>
+            <p className="mt-2.5 text-[14px] text-neutral-600 leading-relaxed max-w-[270px]">
+              Сравниваете цены, отзывы и нанимаете команду для ремонта
+            </p>
+          </div>
         </div>
       </div>
     </section>

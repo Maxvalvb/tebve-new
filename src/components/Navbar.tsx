@@ -1,93 +1,87 @@
 import React, { useState } from 'react';
-import { ArrowRight, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { FebbyLogo } from './FebbyLogo';
 
 interface NavbarProps {
   onOpenLeadModal: (source?: string) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenLeadModal }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+const NAV_LINKS = [
+  { label: 'Как мы работаем', href: '#how-it-works' },
+  { label: 'Наши услуги', href: '#services' },
+  { label: 'О нас', href: '#why-us' },
+  { label: 'Отзывы', href: '#reviews' },
+  { label: 'Контакты', href: '#footer' },
+];
 
-  const navLinks = [
-    { label: 'Как это работает', href: '#how-it-works' },
-    { label: 'Примеры', href: '#variants' },
-    { label: 'Отзывы', href: '#reviews' },
-    { label: 'FAQ', href: '#faq' },
-    { label: 'Контакты', href: '#contacts' },
-  ];
+export const Navbar: React.FC<NavbarProps> = ({ onOpenLeadModal }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Brand: playful pure text "febby" */}
-        <a href="#" className="group cursor-pointer flex items-center">
-          <FebbyLogo size="md" />
-        </a>
+    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-neutral-100">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-[72px] flex items-center justify-between gap-8">
+        {/* Zone 1: Brand Mark */}
+        <FebbyLogo />
 
-        {/* Center Nav Links */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
+        {/* Zone 2: 5 Single-Line Nav Links */}
+        <nav className="hidden lg:flex items-center gap-7 text-[14px] font-medium text-neutral-600">
+          {NAV_LINKS.map((link) => (
             <a
-              key={link.label}
+              key={link.href}
               href={link.href}
-              className="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors"
+              className="hover:text-[#11161A] transition-colors whitespace-nowrap shrink-0"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        {/* Right CTA Button */}
-        <div className="hidden sm:flex items-center gap-3">
+        {/* Zone 3: 1 Primary CTA Action */}
+        <div className="flex items-center gap-3 shrink-0">
           <button
-            onClick={() => onOpenLeadModal('Header button')}
-            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#11161a] hover:bg-black text-white text-xs sm:text-sm font-medium transition-all duration-200 shadow-sm hover:shadow"
+            type="button"
+            onClick={() => onOpenLeadModal('Шапка сайта')}
+            className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-[#C4FB18] hover:bg-[#b5eb0e] text-[#11161A] text-[13px] font-bold transition-colors whitespace-nowrap shrink-0 cursor-pointer"
           >
-            <span>Оставить заявку</span>
-            <div className="w-5 h-5 rounded-full bg-neutral-800 flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-              <ArrowRight className="w-3 h-3 text-white" />
-            </div>
+            Оставить заявку
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            className="lg:hidden w-10 h-10 rounded-full border border-neutral-200 flex items-center justify-center text-neutral-800 hover:bg-neutral-50 transition-colors cursor-pointer"
+            aria-label={isMobileMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
-
-        {/* Mobile menu trigger */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100"
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
       </div>
 
       {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-b border-neutral-200 bg-white px-4 pt-3 pb-6 space-y-4">
-          <nav className="flex flex-col space-y-3">
-            {navLinks.map((link) => (
+      {isMobileMenuOpen && (
+        <div className="lg:hidden bg-white border-t border-neutral-100 px-4 py-5 space-y-3 shadow-lg">
+          <nav className="flex flex-col gap-1">
+            {NAV_LINKS.map((link) => (
               <a
-                key={link.label}
+                key={link.href}
                 href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-neutral-700 hover:text-neutral-900 py-1"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-3 py-2.5 rounded-xl text-sm font-medium text-neutral-700 hover:bg-neutral-50 hover:text-[#11161A] transition-colors"
               >
                 {link.label}
               </a>
             ))}
           </nav>
-          <div className="pt-2 border-t border-neutral-100">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenLeadModal('Mobile Menu CTA');
-              }}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-full bg-[#11161a] text-white text-sm font-medium"
-            >
-              <span>Оставить заявку</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              onOpenLeadModal('Мобильное меню');
+            }}
+            className="w-full py-3 rounded-full bg-[#C4FB18] hover:bg-[#b5eb0e] text-[#11161A] text-sm font-bold transition-colors cursor-pointer"
+          >
+            Оставить заявку
+          </button>
         </div>
       )}
     </header>

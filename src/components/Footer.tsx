@@ -1,110 +1,49 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
 import { FebbyLogo } from './FebbyLogo';
 
 interface FooterProps {
-  onOpenLeadModal: (source?: string) => void;
   onOpenPolicy: (type: 'privacy' | 'terms') => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenLeadModal, onOpenPolicy }) => {
-  const navSections = [
-    {
-      title: 'О сервисе',
-      links: [
-        { label: 'Как это работает', href: '#how-it-works' },
-        { label: 'Варианты ремонта', href: '#variants' },
-        { label: 'Популярные стили', href: '#styles' },
-        { label: 'Отзывы клиентов', href: '#reviews' },
-        { label: 'Частые вопросы (FAQ)', href: '#faq' },
-      ],
-    },
-    {
-      title: 'Тарифы ремонта',
-      links: [
-        { label: 'Эконом — от 800 000 ₽', href: '#variants' },
-        { label: 'Комфорт — от 1 200 000 ₽', href: '#variants' },
-        { label: 'Премиум — от 2 000 000 ₽', href: '#variants' },
-        { label: 'Дизайн-проект — от 1 500 000 ₽', href: '#variants' },
-        { label: 'Лофт — от 1 800 000 ₽', href: '#variants' },
-      ],
-    },
-    {
-      title: 'Услуги и контроль',
-      links: [
-        { label: 'Авторский надзор', href: '#styles' },
-        { label: 'Подбор и закупка материалов', href: '#styles' },
-        { label: 'Инженерные сети и электрика', href: '#styles' },
-        { label: 'Перепланировка и согласование', href: '#styles' },
-        { label: 'Гарантия до 3 лет', href: '#faq' },
-      ],
-    },
-  ];
-
+export const Footer: React.FC<FooterProps> = ({ onOpenPolicy }) => {
   return (
-    <footer id="contacts" className="pt-14 pb-12 bg-white border-t border-neutral-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Grid: Enlarged Brand on the left + 3 organized link groups */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12">
-          {/* Brand Info (Pure toy text "febby") */}
-          <div className="lg:col-span-4 flex flex-col items-start">
-            <a href="#" className="group cursor-pointer mb-4 flex items-center">
-              <FebbyLogo size="lg" />
+    <footer id="footer" className="bg-white border-t border-neutral-200 pt-10 pb-8">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top Row: Logo · Links · 4 Social Circles */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <FebbyLogo />
+
+          <nav className="flex flex-wrap items-center gap-6 text-[13px] font-medium text-neutral-600">
+            <a href="#how-it-works" className="hover:text-[#11161A] transition-colors whitespace-nowrap">
+              Как мы работаем
             </a>
-
-            <p className="text-sm text-neutral-500 max-w-sm leading-relaxed mb-6">
-              Сервис подбора проверенных подрядчиков и качественного ремонта квартир под любой бюджет. Прозрачные сметы, фиксация сроков и авторский надзор.
-            </p>
-
-            <button
-              onClick={() => onOpenLeadModal('Footer CTA')}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#11161a] hover:bg-black text-white text-xs sm:text-sm font-semibold transition-all shadow-sm active:scale-95 group"
-            >
-              <span>Оставить заявку</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-
-          {/* Grouped Links */}
-          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
-            {navSections.map((sec) => (
-              <div key={sec.title} className="flex flex-col">
-                <h4 className="text-sm font-bold text-[#11161a] tracking-tight mb-4">
-                  {sec.title}
-                </h4>
-                <ul className="space-y-2.5">
-                  {sec.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-xs sm:text-sm text-neutral-500 hover:text-neutral-900 transition-colors block leading-snug"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+            <a href="#services" className="hover:text-[#11161A] transition-colors whitespace-nowrap">
+              Услуги
+            </a>
+            <a href="#why-us" className="hover:text-[#11161A] transition-colors whitespace-nowrap">
+              О нас
+            </a>
+            <a href="#reviews" className="hover:text-[#11161A] transition-colors whitespace-nowrap">
+              Контакты
+            </a>
+          </nav>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-neutral-100 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
-          <div>
-            © 2025 febby.ru. Все права защищены.
-          </div>
-
-          <div className="flex items-center gap-6">
+        {/* Bottom Row: Copyright & Legal */}
+        <div className="mt-8 pt-6 border-t border-neutral-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-neutral-400">
+          <p>© 2026 febby · Калининград. Все права защищены.</p>
+          <div className="flex flex-wrap items-center gap-6">
             <button
+              type="button"
               onClick={() => onOpenPolicy('privacy')}
-              className="hover:text-neutral-700 transition-colors"
+              className="hover:text-neutral-700 transition-colors cursor-pointer"
             >
               Политика конфиденциальности
             </button>
             <button
+              type="button"
               onClick={() => onOpenPolicy('terms')}
-              className="hover:text-neutral-700 transition-colors"
+              className="hover:text-neutral-700 transition-colors cursor-pointer"
             >
               Условия использования
             </button>
