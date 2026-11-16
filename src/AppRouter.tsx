@@ -1,11 +1,12 @@
-import React, { Component, type ReactNode } from 'react';
+import React, { Component, Suspense, lazy, type ReactNode } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import RenovationApp from './App';
-import WebsiteApp from './website/App';
-import Construction from './website/projects/Construction';
-import Fitness from './website/projects/Fitness';
-import Restaurant from './website/projects/Restaurant';
-import EcoStore from './website/projects/EcoStore';
+
+const RenovationApp = lazy(() => import('./App'));
+const WebsiteApp = lazy(() => import('./website/App'));
+const Construction = lazy(() => import('./website/projects/Construction'));
+const Fitness = lazy(() => import('./website/projects/Fitness'));
+const Restaurant = lazy(() => import('./website/projects/Restaurant'));
+const EcoStore = lazy(() => import('./website/projects/EcoStore'));
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -67,19 +68,25 @@ function LocationAwareApp() {
   if (isWebsiteRoute) {
     return (
       <WebsiteErrorBoundary>
-        <Routes>
-          <Route path="/website/projects/construction" element={<Construction />} />
-          <Route path="/website/projects/fitness" element={<Fitness />} />
-          <Route path="/website/projects/restaurant" element={<Restaurant />} />
-          <Route path="/website/projects/ecostore" element={<EcoStore />} />
-          <Route path="/website/*" element={<WebsiteApp />} />
-          <Route path="*" element={<WebsiteApp />} />
-        </Routes>
+        <Suspense fallback={<div className="min-h-screen bg-white" />}>
+          <Routes>
+            <Route path="/website/projects/construction" element={<Construction />} />
+            <Route path="/website/projects/fitness" element={<Fitness />} />
+            <Route path="/website/projects/restaurant" element={<Restaurant />} />
+            <Route path="/website/projects/ecostore" element={<EcoStore />} />
+            <Route path="/website/*" element={<WebsiteApp />} />
+            <Route path="*" element={<WebsiteApp />} />
+          </Routes>
+        </Suspense>
       </WebsiteErrorBoundary>
     );
   }
 
-  return <RenovationApp />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white" />}>
+      <RenovationApp />
+    </Suspense>
+  );
 }
 
 export function AppRouter() {

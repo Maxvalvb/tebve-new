@@ -41,7 +41,7 @@ export function generateSeoPages() {
   // Canonical URL
   websiteHtml = websiteHtml.replace(
     '<link rel="canonical" href="https://febby.ru/" />',
-    '<link rel="canonical" href="https://febby.ru/website" />'
+    '<link rel="canonical" href="https://febby.ru/website/" />'
   );
 
   // OpenGraph & Twitter metadata for /website
@@ -55,7 +55,7 @@ export function generateSeoPages() {
   );
   websiteHtml = websiteHtml.replace(
     '<meta property="og:url" content="https://febby.ru/" />',
-    '<meta property="og:url" content="https://febby.ru/website" />'
+    '<meta property="og:url" content="https://febby.ru/website/" />'
   );
   websiteHtml = websiteHtml.replace(
     /<meta name="twitter:title"[^>]*>/,
@@ -73,7 +73,7 @@ export function generateSeoPages() {
       "@type": "ProfessionalService",
       "serviceType": "Web Development",
       "name": "febby.ru — Разработка сайтов под ключ",
-      "url": "https://febby.ru/website",
+      "url": "https://febby.ru/website/",
       "logo": "https://febby.ru/android-chrome-192x192.png",
       "image": "https://febby.ru/android-chrome-192x192.png",
       "description": "Разработка продающих сайтов под ключ от 30 000 ₽. Создание лендингов, корпоративных сайтов и интернет-магазинов. Срок от 2 дней. Домен и хостинг в подарок!",
