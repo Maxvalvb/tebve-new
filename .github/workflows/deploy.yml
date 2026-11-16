@@ -36,7 +36,7 @@ jobs:
         run: npm run build
 
       - name: Copy index.html to 404.html for SPA support
-        run: cp dist/index.html dist/404.html || true
+        run: test -f dist/404.html || cp dist/index.html dist/404.html || true
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

@@ -219,6 +219,12 @@ export function generateSeoPages() {
   // 3. Copy clean neutral SPA fallback 404.html (counter initializes per route in React)
   fs.writeFileSync(path.join(distDir, '404.html'), baseHtml, 'utf-8');
 
+  // 4. Clean build-unrelated files copied from public/ (recursive zip & chat attachments)
+  const distZip = path.join(distDir, 'febby_pages_files.zip');
+  if (fs.existsSync(distZip)) fs.rmSync(distZip, { force: true });
+  const distAistudio = path.join(distDir, 'assets', 'aistudio');
+  if (fs.existsSync(distAistudio)) fs.rmSync(distAistudio, { recursive: true, force: true });
+
   console.log('Successfully generated SEO HTML & isolated Metrika counters (114230014 on /, 114060460 on /website)!');
 }
 

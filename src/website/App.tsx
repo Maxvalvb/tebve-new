@@ -218,6 +218,25 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
 
   useEffect(() => {
+    // Sync document metadata for client-side navigation & SPA routes
+    document.title = 'Создание и разработка сайтов под ключ от 30 000 ₽ — febby.ru';
+    const descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) {
+      descMeta.setAttribute(
+        'content',
+        'Разработка продающих сайтов под ключ от 30 000 ₽. Создание лендингов, корпоративных сайтов и интернет-магазинов. Срок от 2 дней. Домен и хостинг в подарок!'
+      );
+    }
+    const kwMeta = document.querySelector('meta[name="keywords"]');
+    if (kwMeta) {
+      kwMeta.setAttribute(
+        'content',
+        'создание сайтов, разработка сайтов под ключ, заказать лендинг, создание интернет-магазина, сайт для бизнеса, веб студия, купить сайт, веб разработка, разработка лендинга'
+      );
+    }
+    document.querySelector('meta[name="geo.region"]')?.remove();
+    document.querySelector('meta[name="geo.placename"]')?.remove();
+
     // 1. Initialize Yandex Metrika counter 114060460 exclusively for website section
     const metrikaId = 114060460;
     if (!(window as any).ym) {
