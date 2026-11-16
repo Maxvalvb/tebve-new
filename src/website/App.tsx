@@ -22,7 +22,7 @@ import React, { useState, useEffect } from "react";
 import heroDevImage from "./assets/hero-developer-transparent.png";
 
 // --- Data --- 
-const services = [ { title:"Лендинги в Калининграде", desc:"Одностраничные сайты с высокой конверсией для компаний и услуг в Калининграде и области.", icon: <LayoutTemplate size={20} />, tags: ["Дизайн","Верстка","Конверсия"], stats:"Быстрый запуск" }, { title:"Корпоративные сайты", desc:"Многостраничные сайты для бизнеса в Калининграде, формирующие доверие и поток заявок.", icon: <Briefcase size={20} />, tags: ["Многостраничность","CMS","Каталог"], stats:"Лицо компании" }, { title:"Хостинг и Домен", desc:"Предоставляем бесплатный хостинг и домен в подарок на 1 год при заказе сайта под ключ.", icon: <Server size={20} />, tags: ["Бесплатный хостинг","Домен на 1 год"], stats:"Всё включено" }, { title:"SEO по Калининграду", desc:"Настройка сайта для успешного продвижения и выдачи в Яндекс и Google по Калининграду.", icon: <Search size={20} />, tags: ["Мета-теги","Скорость","Индексация"], stats:"Локальный рост" } ]; 
+const services = [ { title:"Лендинги", desc:"Одностраничные сайты с высокой конверсией для ваших товаров или услуг.", icon: <LayoutTemplate size={20} />, tags: ["Дизайн","Верстка","Конверсия"], stats:"Быстрый запуск" }, { title:"Корпоративные сайты", desc:"Многостраничные сайты для бизнеса, формирующие доверие и имидж.", icon: <Briefcase size={20} />, tags: ["Многостраничность","CMS","Каталог"], stats:"Лицо компании" }, { title:"Хостинг и Домен", desc:"Предоставляем бесплатный хостинг и домен в подарок на 1 год.", icon: <Server size={20} />, tags: ["Бесплатный хостинг","Домен на 1 год"], stats:"Всё включено" }, { title:"SEO-оптимизация", desc:"Базовая настройка сайта для успешного продвижения в Яндекс и Google.", icon: <Search size={20} />, tags: ["Мета-теги","Скорость","Индексация"], stats:"Органический рост" } ]; 
 const process = [ { num:"01", title:"Обсуждение и ТЗ", desc:"Связываемся с вами, определяем цели, согласуем структуру и техническое задание.", icon: <MessageCircle size={18} /> }, { num:"02", title:"Разработка", desc:"Создаем уникальный дизайн, верстаем и программируем сайт под ваши задачи.", icon: <Code2 size={18} /> }, { num:"03", title:"Презентация и Правки", desc:"Демонстрируем рабочий сайт, вносим необходимые правки и доводим проект до идеала.", icon: <Wrench size={18} /> }, { num:"04", title:"Приемка и Оплата", desc:"Вы принимаете готовый проект, переводите оплату, и мы запускаем сайт на вашем домене.", icon: <CheckCircle size={18} /> } ]; 
 const portfolio = [
   {
@@ -113,11 +113,11 @@ const pricing = [
 ];
 const faqs = [
   {
-    q: "Что входит в стоимость разработки сайта в Калининграде за 30 000 руб?",
-    a: "В эту стоимость входит полноценный сайт под ключ для бизнеса в Калининграде и области: разработка уникального дизайна, адаптивная верстка под все устройства, настройка форм обратной связи, базовая SEO-оптимизация под регион, а также домен в подарок на 1 год и надежный бесплатный хостинг.",
+    q: "Что входит в стоимость сайта за 30 000 руб?",
+    a: "В эту стоимость входит полноценный сайт под ключ: разработка уникального дизайна, адаптивная верстка под все устройства, настройка форм обратной связи, базовая SEO-оптимизация, а также домен в подарок на 1 год и надежный бесплатный хостинг.",
   },
   {
-    q: "Как происходит процесс оплаты при заказе сайта в Калининграде?",
+    q: "Как происходит процесс оплаты?",
     a: "Сначала мы разрабатываем проект, презентуем вам рабочий сайт и вносим необходимые правки. Оплата производится только после того, как вы убедились в результате и приняли готовую работу.",
   },
   {
@@ -209,7 +209,7 @@ const FebbyLogo = ({ light = false }: { light?: boolean }) => (
         light ? "text-slate-400" : "text-slate-500"
       }`}
     >
-      Разработка сайтов · Калининград
+      Разработка сайтов под ключ
     </div>
   </div>
 );
@@ -272,7 +272,7 @@ export default function App() {
             <div className="hidden lg:flex items-center gap-1">
               <Badge className="bg-[#f2fde0] text-slate-900 border-[#d3fc74] flex items-center gap-1.5 font-medium">
                 <span className="w-2 h-2 rounded-full bg-[#bcf824] animate-pulse" />
-                Калининград · Готовы к проектам
+                Готовы к новым проектам
               </Badge>
             </div>
           </div>
@@ -299,20 +299,17 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 lg:gap-12 items-center">
             {/* Left: Typography, description & CTA buttons */}
             <div className="md:col-span-7 relative z-10 flex flex-col justify-center">
-              <h1 className="text-3xl sm:text-5xl lg:text-[3.6rem] xl:text-[4rem] leading-[1.15] md:leading-[1.08] font-display font-bold tracking-tight uppercase mb-6 md:mb-8">
-                Разработка сайтов
-                <br />
-                в Калининграде,
-                <br />
-                которые{" "}
+              <h1 className="text-3xl sm:text-5xl lg:text-[3.8rem] xl:text-[4.2rem] leading-[1.18] md:leading-[1.08] font-display font-bold tracking-tight uppercase mb-6 md:mb-8">
+                Создаем сайты,
+                <br /> которые{" "}
                 <span className="underline decoration-[#bcf824] decoration-4 sm:decoration-[6px] md:decoration-[8px] underline-offset-4 sm:underline-offset-8">
                   продают
                 </span>
               </h1>
               <p className="text-lg md:text-xl text-slate-600 font-light leading-relaxed max-w-xl mb-8 md:mb-10">
-                Создание сайтов под ключ в Калининграде и Калининградской области.
-                Проектируем продающие лендинги, корпоративные сайты и
-                интернет-магазины: от дизайна до запуска.
+                Проектируем и разрабатываем современные корпоративные сайты и
+                конверсионные лендинги. Берем на себя всё: от дизайна до
+                запуска.
               </p>
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <a
@@ -427,8 +424,8 @@ export default function App() {
             </div>{" "}
             <p className="max-w-md text-slate-600 font-light text-base md:text-lg">
               {" "}
-              Мы создаем сайты под ключ в Калининграде: от идеи и дизайна до
-              верстки, настройки хостинга и SEO-продвижения в регионе.{" "}
+              Мы создаем сайты под ключ: от идеи и дизайна до верстки, настройки
+              хостинга и базового SEO-продвижения.{" "}
             </p>{" "}
           </div>{" "}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -708,8 +705,8 @@ export default function App() {
               <Badge className="bg-[#f2fde0] text-slate-900 border-[#d3fc74] mb-4 shadow-sm font-medium">
                 Инвестиции
               </Badge>
-              <h2 className="text-3xl md:text-5xl font-display font-bold tracking-tight uppercase">
-                Стоимость разработки сайтов в Калининграде
+              <h2 className="text-4xl md:text-6xl font-display font-bold tracking-tight uppercase">
+                Стоимость разработки
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -823,7 +820,7 @@ export default function App() {
                   Оставьте заявку
                 </h2>
                 <p className="text-slate-400 text-sm sm:text-base md:text-lg">
-                  Разработка сайтов в Калининграде — обсудим задачу, рассчитаем смету и ответим в течение 15 минут.
+                  Обсудим задачу, рассчитаем смету и ответим в течение 15 минут.
                 </p>
               </div>
 
@@ -833,7 +830,7 @@ export default function App() {
             <div className="pt-6 md:pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
               <FebbyLogo light />
               <div className="text-xs md:text-sm text-slate-500 text-center md:text-right">
-                © 2026 febby · Создание сайтов в Калининграде. Все права защищены.
+                © 2026 Все права защищены.
               </div>
             </div>
           </div>
