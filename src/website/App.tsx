@@ -218,6 +218,15 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
 
   useEffect(() => {
+    // Normalize trailing slash (/website/ -> /website) in browser address bar
+    if (window.location.pathname === '/website/') {
+      window.history.replaceState(
+        null,
+        '',
+        '/website' + window.location.search + window.location.hash
+      );
+    }
+
     // Sync document metadata for client-side navigation & SPA routes
     document.title = 'Создание и разработка сайтов под ключ от 30 000 ₽ — febby.ru';
     const descMeta = document.querySelector('meta[name="description"]');

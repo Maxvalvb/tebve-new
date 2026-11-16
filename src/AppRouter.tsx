@@ -74,6 +74,7 @@ function LocationAwareApp() {
             <Route path="/website/projects/fitness" element={<Fitness />} />
             <Route path="/website/projects/restaurant" element={<Restaurant />} />
             <Route path="/website/projects/ecostore" element={<EcoStore />} />
+            <Route path="/website" element={<WebsiteApp />} />
             <Route path="/website/*" element={<WebsiteApp />} />
             <Route path="*" element={<WebsiteApp />} />
           </Routes>
@@ -93,6 +94,7 @@ export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/website" element={<LocationAwareApp />} />
         <Route path="/website/*" element={<LocationAwareApp />} />
         <Route path="/*" element={<LocationAwareApp />} />
       </Routes>

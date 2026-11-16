@@ -10,11 +10,11 @@ export function generateSeoPages() {
 
   const baseHtml = fs.readFileSync(indexPath, 'utf-8');
 
-  // 1. Create dist/website/index.html with dedicated general web-development metadata for Yandex
+  // 1. Create ONLY dist/website.html (never dist/website/ folder, so GitHub Pages serves /website with 200 OK without redirecting to /website/)
   // Strip all Kaliningrad geo/keywords so /website works nationwide without regional limitation.
   const websiteDir = path.join(distDir, 'website');
-  if (!fs.existsSync(websiteDir)) {
-    fs.mkdirSync(websiteDir, { recursive: true });
+  if (fs.existsSync(websiteDir)) {
+    fs.rmSync(websiteDir, { recursive: true, force: true });
   }
 
   let websiteHtml = baseHtml;
@@ -38,10 +38,10 @@ export function generateSeoPages() {
   websiteHtml = websiteHtml.replace(/\s*<meta name="geo\.region"[^>]*>/g, '');
   websiteHtml = websiteHtml.replace(/\s*<meta name="geo\.placename"[^>]*>/g, '');
 
-  // Canonical URL
+  // Canonical URL (without trailing slash)
   websiteHtml = websiteHtml.replace(
     '<link rel="canonical" href="https://febby.ru/" />',
-    '<link rel="canonical" href="https://febby.ru/website/" />'
+    '<link rel="canonical" href="https://febby.ru/website" />'
   );
 
   // OpenGraph & Twitter metadata for /website
@@ -55,7 +55,7 @@ export function generateSeoPages() {
   );
   websiteHtml = websiteHtml.replace(
     '<meta property="og:url" content="https://febby.ru/" />',
-    '<meta property="og:url" content="https://febby.ru/website/" />'
+    '<meta property="og:url" content="https://febby.ru/website" />'
   );
   websiteHtml = websiteHtml.replace(
     /<meta name="twitter:title"[^>]*>/,
@@ -73,7 +73,7 @@ export function generateSeoPages() {
       "@type": "ProfessionalService",
       "serviceType": "Web Development",
       "name": "febby.ru — Разработка сайтов под ключ",
-      "url": "https://febby.ru/website/",
+      "url": "https://febby.ru/website",
       "logo": "https://febby.ru/android-chrome-192x192.png",
       "image": "https://febby.ru/android-chrome-192x192.png",
       "description": "Разработка продающих сайтов под ключ от 30 000 ₽. Создание лендингов, корпоративных сайтов и интернет-магазинов. Срок от 2 дней. Домен и хостинг в подарок!",
@@ -150,7 +150,7 @@ export function generateSeoPages() {
     `<div id="root">${websiteStaticContent}</div>`
   );
 
-  fs.writeFileSync(path.join(websiteDir, 'index.html'), websiteHtml, 'utf-8');
+  fs.writeFileSync(path.join(distDir, 'website.html'), websiteHtml, 'utf-8');
 
   // 2. Inject Rich Static SEO Content specifically for Kaliningrad repair landing (febby.ru/)
   const repairStaticContent = `
@@ -216,8 +216,24 @@ export function generateSeoPages() {
   );
   fs.writeFileSync(indexPath, mainHtml, 'utf-8');
 
-  // 3. Copy clean neutral SPA fallback 404.html (counter initializes per route in React)
-  fs.writeFileSync(path.join(distDir, '404.html'), baseHtml, 'utf-8');
+  // 3. Generate neutral SPA fallback 404.html (no Kaliningrad leak + instant /website/ -> /website redirect)
+  const trailingSlashRedirectScript = `<script>
+      if (location.pathname === '/website/' || location.pathname === '/website/index.html') {
+        location.replace('/website' + location.search + location.hash);
+      }
+    </script>`;
+  let fallbackHtml = baseHtml;
+  fallbackHtml = fallbackHtml.replace(/<title>[\s\S]*?<\/title>/, '<title>febby.ru</title>');
+  fallbackHtml = fallbackHtml.replace(/\s*<meta name="description"[^>]*>/g, '');
+  fallbackHtml = fallbackHtml.replace(/\s*<meta name="keywords"[^>]*>/g, '');
+  fallbackHtml = fallbackHtml.replace(/\s*<meta name="geo\.region"[^>]*>/g, '');
+  fallbackHtml = fallbackHtml.replace(/\s*<meta name="geo\.placename"[^>]*>/g, '');
+  fallbackHtml = fallbackHtml.replace(/\s*<link rel="canonical"[^>]*>/g, '');
+  fallbackHtml = fallbackHtml.replace(/\s*<meta property="og:(?:url|title|description)"[^>]*>/g, '');
+  fallbackHtml = fallbackHtml.replace(/\s*<meta name="twitter:(?:title|description)"[^>]*>/g, '');
+  fallbackHtml = fallbackHtml.replace(/\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
+  fallbackHtml = fallbackHtml.replace('</head>', `  ${trailingSlashRedirectScript}\n  </head>`);
+  fs.writeFileSync(path.join(distDir, '404.html'), fallbackHtml, 'utf-8');
 
   // 4. Clean build-unrelated files copied from public/ (recursive zip & chat attachments)
   const distZip = path.join(distDir, 'febby_pages_files.zip');
